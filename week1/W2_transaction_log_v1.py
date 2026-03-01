@@ -1,15 +1,16 @@
 import datetime
 
+expenses = []
 
 #adding expenses
-def get_expense():
-    days = int(input("enter days"))
+def add_expense():
+    num_of_expense = int(input("enter how many expenses you will be adding: "))
     today = datetime.datetime.today()
-    expenses = []
+    
     
     id = 1
     
-    for day in range(days):
+    for day in range(num_of_expense):
         expense = float(input("Enter expenses"))
         category = input("Enter category: ")
         now = today.strftime("%Y-%m-%d %H:%M:%S")
@@ -28,10 +29,10 @@ def search_by_category(expense_list):
     search_found = []
     for expense in expense_list:
         if expense["Category"] == searched:
-            searched = {"Id": expense['Id'], "Expense": expense['Expense'], "Category":expense['Category'], "Time": expense['Time'] }
-            search_found.append(searched)
+            searched1 = {"Id": expense['Id'], "Expense": expense['Expense'], "Category":expense['Category'], "Time": expense['Time'] }
+            search_found.append(searched1)
             
-       
+    print(search_found)
     for expense in search_found:
         if len(search_found) <= 0:
             print("Data did not found")
@@ -70,8 +71,28 @@ def show_summary(expenses_list):
     for expense in expenses_list:
         print(f"ID: {expense['Id']} | {expense['Category']} | {expense['Expense']} | {expense['Time']}")
     
-# running a single function(checking if is doing what intended it does to do.)   
-delete_transaction(get_expense())
 
-        
-        
+def menu():
+    print("1. Add transaction Please select 1")
+    print("2. Show all please select 2")
+    print("3. Search by Category please select 3")
+    print("4. Delete please select 4")
+    print("5. Exit please select 5 ")
+    
+    option = int(input("Please enter your choice: "))
+
+    while option != 5:
+        if option == 1:
+            add_expense()
+        elif option == 2:
+            show_summary(expenses)
+        elif option == 3:
+            search_by_category(expenses)
+        elif option == 4:
+            delete_transaction(expenses)
+            
+        option = int(input("Please enter your choice: "))
+    
+    print("Program has exited.")   
+
+menu()
