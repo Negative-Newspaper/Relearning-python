@@ -1,11 +1,13 @@
 import datetime
 
+today1 = datetime.datetime.today()
+now1 = today1.strftime("%Y-%m-%d %H:%M:%S")
+
 expenses = []
 
 #adding expenses
 def add_expense():
     num_of_expense = int(input("enter how many expenses you will be adding: "))
-    today = datetime.datetime.today()
     
     
     id = 1
