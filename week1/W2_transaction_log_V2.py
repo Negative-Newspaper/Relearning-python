@@ -5,14 +5,30 @@ import os
 def save_transaction():
     today = datetime.datetime.today()
     now = today.strftime("%Y-%m-%d %H:%M:%S")
+    
     file_exist = os.path.isfile("transaction.csv")
     
-    with open("transaction.csv", mode="a", newline="") as file:
-        write = csv.writer(file)
+    inputs = int(input("Enter number of input: "))
+    
+    for number_input in range(inputs):
         
-        if not file_exist:
-            write.writerow(["Id", "Amount", "Category", "timeStamp"])
+        amount = float(input("Enter Amount: "))
+        category = input("Enter Category: ")
+    
+        with open("transaction.csv", mode="a", newline="") as file:
+            write = csv.writer(file)
             
-        write.writerow([1, 100, "food", now])
+            if not file_exist:
+                write.writerow(["Id", "Amount", "Category", "timeStamp"])
+                
+            write.writerow([1, amount, category, now])
         
-save_transaction()
+def load_from_scv():
+    
+    with open("transaction.csv", mode="r") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader: 
+            print(row)
+
+load_from_scv()
