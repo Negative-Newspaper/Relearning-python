@@ -1,7 +1,7 @@
 import datetime
 
-today1 = datetime.datetime.today()
-now1 = today1.strftime("%Y-%m-%d %H:%M:%S")
+today = datetime.datetime.today()
+
 
 expenses = []
 

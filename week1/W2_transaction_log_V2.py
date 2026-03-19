@@ -1,34 +1,34 @@
 import csv
-import datetime
 import os
+import datetime
 
-def save_transaction():
-    today = datetime.datetime.today()
-    now = today.strftime("%Y-%m-%d %H:%M:%S")
+today = datetime.datetime.today()
+file_exist = os.path.isfile("transaction.csv")
+expense_list = []
+
+def add_expenses():
+    expenses_to_add = int(input("How many expenses you will be adding? "))
+
+    for expense in range(expenses_to_add):
+        category = input("Enter the expense type: ")
+        amount = float(input("Enter amount of expenses: "))
+        time = today.strftime("%Y-%m-%d %H:%M:%S")
+        expenses = {"ID": 1, "Time": time, "Category": category, "Amount": amount }
+        expense_list.append(expenses)
+
+def save_transaction(expense_list):
+    keys = expense_list[0]
     
-    file_exist = os.path.isfile("transaction.csv")
-    
-    inputs = int(input("Enter number of input: "))
-    
-    for number_input in range(inputs):
+    with open("transaction.csv", mode="a", newline="") as file:
+        write = csv.DictWriter(file, keys)
         
-        amount = float(input("Enter Amount: "))
-        category = input("Enter Category: ")
-    
-        with open("transaction.csv", mode="a", newline="") as file:
-            write = csv.writer(file)
-            
-            if not file_exist:
-                write.writerow(["Id", "Amount", "Category", "timeStamp"])
-                
-            write.writerow([1, amount, category, now])
+        if not file_exist:
+            write.writeheader()
         
-def load_from_scv():
+        write.writerows(expense_list)
     
-    with open("transaction.csv", mode="r") as file:
-        reader = csv.DictReader(file)
+add_expenses()
 
-        for row in reader: 
-            print(row)
+save_transaction(expense_list)
 
-load_from_scv()
+print(expense_list)
