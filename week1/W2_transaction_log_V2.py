@@ -26,7 +26,18 @@ def save_transaction(expense_list):
             write.writeheader()
         
         write.writerows(expense_list)
-    
+        
+def load_from_CSV_to_list(fileName):
+    with open(fileName, mode="r") as file:
+        reader = csv.DictReader(file)
+        
+        for row in reader:
+            expense_list.append(row)
+            
+        
+load_from_CSV_to_list("transaction.csv")
+
+print(expense_list)       
 add_expenses()
 
 save_transaction(expense_list)
