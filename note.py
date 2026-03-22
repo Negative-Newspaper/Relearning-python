@@ -49,7 +49,7 @@ save it on s list of dictionary (done)
 
 auto seve it on a CSV
 
-add auto load 
+add auto load (done)
 
 add auto save
 

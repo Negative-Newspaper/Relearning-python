@@ -4,7 +4,26 @@ import datetime
 
 today = datetime.datetime.today()
 file_exist = os.path.isfile("transaction.csv")
-expense_list = []
+
+def load_from_CSV_to_list(fileName):
+    if not os.path.exists(fileName):
+            return []
+    else:
+        with open(fileName, mode="r") as file:
+            reader = csv.DictReader(file)
+            
+            for row in reader:
+                try: 
+                    row["ID"] = int(row["ID"])
+                    row["Amount"] = float(row["Amount"])
+                    expense_list.append(row)
+                except ValueError:
+                    print(f"Skipping invalid value in row:{row}")
+                    continue
+        
+expense_list = load_from_CSV_to_list("transaction.csv")
+
+
 
 def add_expenses():
     expenses_to_add = int(input("How many expenses you will be adding? "))
@@ -27,14 +46,7 @@ def save_transaction(expense_list):
         
         write.writerows(expense_list)
         
-def load_from_CSV_to_list(fileName):
-    with open(fileName, mode="r") as file:
-        reader = csv.DictReader(file)
-        
-        for row in reader:
-            expense_list.append(row)
-            
-        
+
 load_from_CSV_to_list("transaction.csv")
 
 print(expense_list)       
