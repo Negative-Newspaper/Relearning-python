@@ -73,8 +73,13 @@ def delete_transaction(expense_list):
             
     save_transaction(expense_list)
     print(lst_to_delete)
-
+    
+def show_expenses():
+    with open("transaction.csv", mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            print(f"ID: {row['ID']} | {row['Category']} | {row['Amount']} | {row['Time']}")
+        
      
 add_expenses()
-delete_transaction(expense_list)
-print(expense_list)   
+show_expenses()
