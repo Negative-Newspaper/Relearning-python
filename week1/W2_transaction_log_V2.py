@@ -79,7 +79,17 @@ def show_expenses():
         reader = csv.DictReader(file)
         for row in reader:
             print(f"ID: {row['ID']} | {row['Category']} | {row['Amount']} | {row['Time']}")
-        
-     
-add_expenses()
-show_expenses()
+
+
+def search_expenses():
+    searchFor = int(input("Input the ID that you want to search: "))
+            
+    for row in expense_list:
+        if row["ID"] == searchFor:
+            print(f"ID: {row['ID']} | {row['Category']} | {row['Amount']} | {row['Time']}")
+        else:
+            print("ID not found")
+               
+ 
+
+search_expenses()
