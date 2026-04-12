@@ -80,7 +80,6 @@ def show_expenses():
         for row in reader:
             print(f"ID: {row['ID']} | {row['Category']} | {row['Amount']} | {row['Time']}")
 
-
 def search_expenses():
     searchFor = int(input("Input the ID that you want to search: "))
             
@@ -90,6 +89,14 @@ def search_expenses():
         else:
             print("ID not found")
                
- 
+def minmax_expenses():
+    
+    maxExpenses = expense_list[0] 
+    
+    for row in expense_list:
+        if row['Amount'] > maxExpenses['Amount']:
+            maxExpenses = row
 
-search_expenses()
+    print(f"{maxExpenses['Category']} - {maxExpenses['Amount']}")
+
+minmax_expenses()
